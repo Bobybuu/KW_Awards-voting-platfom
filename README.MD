@@ -161,3 +161,32 @@ This is a Django project using PostgreSQL as the database.
 ## Usage
 
 - Access the admin site at `http://127.0.0.1:8000/admin/`
+
+## Working with Git Branches
+
+1. **Create a new branch:**
+
+    ```bash
+    git checkout -b your-branch-name
+    ```
+
+2. **Make your changes and commit them:**
+
+    ```bash
+    git add .
+    git commit -m "Your commit message"
+    ```
+
+3. **Push your branch to the remote repository:**
+
+    ```bash
+    git push origin your-branch-name
+    ```
+
+4. **Create a pull request:**
+
+    Go to the repository on GitHub and create a pull request from your branch.
+
+5. **Merge the pull request:**
+
+    Once your pull request is reviewed and approved, it can be merged into the main branch.
