@@ -105,12 +105,16 @@ This is a Django project using PostgreSQL as the database.
 3. Create a database and a user for the project:
 
     ```sql
-    CREATE DATABASE yourdbname;
-    CREATE USER yourdbuser WITH PASSWORD 'yourpassword';
-    ALTER ROLE yourdbuser SET client_encoding TO 'utf8';
-    ALTER ROLE yourdbuser SET default_transaction_isolation TO 'read committed';
-    ALTER ROLE yourdbuser SET timezone TO 'UTC';
-    GRANT ALL PRIVILEGES ON DATABASE yourdbname TO yourdbuser;
+    CREATE DATABASE yourdbname; -- Create the database
+    CREATE USER yourdbuser WITH PASSWORD 'yourpassword'; -- Create the user
+    ALTER ROLE yourdbuser SET client_encoding TO 'utf8'; -- Set the encoding
+    ALTER ROLE yourdbuser SET default_transaction_isolation TO 'read committed'; -- Set the transaction isolation level
+    ALTER ROLE yourdbuser SET timezone TO 'UTC'; -- Set the timezone
+    GRANT ALL PRIVILEGES ON DATABASE yourdbname TO yourdbuser; -- Grant privileges to the user on the database
+    \l -- List all your databases
+    \c yourdbname -- Connect to your database
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp"; -- Create the uuid-ossp extension
+    \du -- List all your users and their privileges
     ```
 
 4. Exit the PostgreSQL prompt:
