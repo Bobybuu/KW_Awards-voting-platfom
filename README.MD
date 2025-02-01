@@ -1,0 +1,159 @@
+# Django Project Setup
+
+This is a Django project using PostgreSQL as the database.
+
+## Requirements
+
+- Python 3.x
+- Django 3.x
+- PostgreSQL
+
+## Installation
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/Bobybuu/KW_Awards-voting-platfom.git
+    cd KW_Awards-voting-platfom/backend
+    ```
+
+2. **Create a virtual environment:**
+
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Set up PostgreSQL:**
+
+### Install PostgreSQL
+
+#### On Windows
+
+- Download the installer from the PostgreSQL Downloads page.
+- Run the installer and follow the setup wizard.
+- Set a password for the PostgreSQL superuser (default user is `postgres`).
+- Choose the port number (default is 5432).
+
+#### On macOS
+
+1. Install Homebrew
+2. Update Homebrew:
+
+    ```bash
+    brew update
+    ```
+
+3. Install PostgreSQL:
+
+    ```bash
+    brew install postgresql
+    ```
+
+4. Start PostgreSQL:
+
+    ```bash
+    brew services start postgresql
+    ```
+
+#### On Linux
+
+1. Update the package list:
+
+    ```bash
+    sudo apt update
+    ```
+
+2. Install PostgreSQL and its contrib package:
+
+    ```bash
+    sudo apt install postgresql postgresql-contrib
+    ```
+
+3. Start PostgreSQL:
+
+    ```bash
+    sudo systemctl start postgresql
+    ```
+
+4. Enable PostgreSQL to start on boot:
+
+    ```bash
+    sudo systemctl enable postgresql
+    ```
+
+### Create a Database and a User for the Project
+
+1. Switch to the PostgreSQL user:
+
+    ```bash
+    sudo -i -u postgres
+    ```
+
+2. Access the PostgreSQL prompt:
+
+    ```bash
+    psql
+    ```
+
+3. Create a database and a user for the project:
+
+    ```sql
+    CREATE DATABASE yourdbname;
+    CREATE USER yourdbuser WITH PASSWORD 'yourpassword';
+    ALTER ROLE yourdbuser SET client_encoding TO 'utf8';
+    ALTER ROLE yourdbuser SET default_transaction_isolation TO 'read committed';
+    ALTER ROLE yourdbuser SET timezone TO 'UTC';
+    GRANT ALL PRIVILEGES ON DATABASE yourdbname TO yourdbuser;
+    ```
+
+4. Exit the PostgreSQL prompt:
+
+    ```sql
+    \q
+    ```
+
+5. **Configure the database in :**
+
+    Edit your  file to include the following:
+
+    ```python
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+        }
+    }
+    ```
+
+6. **Apply migrations:**
+
+    ```bash
+    python manage.py migrate
+    ```
+
+7. **Create a superuser:**
+
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+8. **Run the development server:**
+
+    ```bash
+    python manage.py runserver
+    ```
+
+## Usage
+
+- Access the admin site at `http://127.0.0.1:8000/admin/`
