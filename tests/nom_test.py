@@ -14,7 +14,31 @@ with req.get(link, headers=head) as marko:
 
 nom = {"name": "Alpha",
        "description": "The first nominee",
-       "category_ID": "76aea0b1-ff3d-44e3-97c0-ff973996c848"}
+       "category_ID": "Beta"}
+with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+
+nom = {"name": "Beta",
+       "description": "The second nominee",
+       "category_ID": "Beta"}
+with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+
+nom = {"name": "Theta",
+       "description": "The third nominee",
+       "category_ID": "7f7e9cbc-36ed-4151-aca8-130e0adb1300"}
+with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+
+nom = {"name": "temp",
+       "description": "The third nominee",
+       "category_ID": "not There"}
 with req.post(link, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()

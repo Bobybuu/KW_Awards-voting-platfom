@@ -1,42 +1,47 @@
 from rest_framework import serializers
 from ..models.nominees import Nominees
 from ..models.category import Category
-from uuid import UUID
+import uuid
+
 
 class NomineesSerialiser(serializers.ModelSerializer):
     """
-    Handels the serialization process of this table
+    Handles the serialization process of this table.
     """
+
+    category_ID = serializers.CharField()
+
     class Meta:
-        """Defins the process of serializing"""
         model = Nominees
         fields = ["ID", "name", "description", "created_at",
                   "updated_at", "image", "votes", "share_link",
                   "category_ID"]
         read_only_fields = ["ID", "created_at", "updated_at"]
 
-    def validate_cat(self, value):
+    def validate_category_ID(self, value):
         """
-        Checks the category_ID feild and create accordingly 
+        Validate category ID to handle both UUID and category names.
         """
-        # If its a UUID value
         try:
-            UUID(str(value))
-            category = Category.objects.filter(id=UUID(str(value))).first()
-            if category is None:
-                raise serializers.ValidationError("No Category with such ID")
-            return category
-        except ValueError:
-            # It must be a name then
+            # If value is a valid UUID
+            category_uuid = uuid.UUID(value)
+            category = Category.objects.get(id=category_uuid)
+        except (ValueError, Category.DoesNotExist):
+            # Treat value as a category name
             category = Category.objects.filter(name=value).first()
-            if category is None:
-                raise serializers.ValidationError("No Category with such name")
-            return category
+            if not category:
+                raise serializers.ValidationError("Invalid category name or UUID.")
 
-    def create(self, checked_data):
-        """
-        Returns the nominee instanse
-        """
-        category_instance = checked_data.pop("category_ID")
-        return Nominees.objects.create(category_ID=category_instance,
-                                       **checked_data)
+        # Return the UUID for internal use
+        return category
+
+    def create(self, input_data):
+        # Assign the correct UUID from the validated data
+        category_id = input_data.pop("category_ID")
+        return Nominees.objects.create(category_ID=category_id, **input_data)
+
+    def validate_name(self, value):
+        if Nominees.objects.filter(name__iexact=value).exists():
+            raise serializers.ValidationError(
+                "A nominee with this name exists")
+        return value
