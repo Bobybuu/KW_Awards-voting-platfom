@@ -51,7 +51,7 @@ with req.get(link, headers=head) as marko:
     print(len(polo))
 
 # ID = "6232490e-7aac-4922-8112-e6b4eb0f5ba4" # Chosen from database
-# with req.delete(link + "d/" + ID, headers=head) as marko:
+# with req.delete(link + "delete/" + ID, headers=head) as marko:
 #     print(marko.status_code)
 #     polo = marko.json()
 #     print(polo)
@@ -60,3 +60,20 @@ with req.get(link, headers=head) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(len(polo))
+
+
+ID = "d5cfc1bb-e497-49ad-9d4c-68c87817637b" # Chosen from database
+edit = {"name": "Edited again"}
+with req.put(link + "put/" + ID, headers=head,
+             data=json.dumps(edit)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+
+ID = "d5cfc1bb-e497-49ad-9d4c-68c87817637b" # Chosen from database
+with req.get(link + ID, headers=head) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print("")
+    print("")
+    print(polo)
