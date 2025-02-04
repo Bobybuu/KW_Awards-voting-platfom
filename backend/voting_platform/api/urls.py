@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.category_views import CategoryListCreateView, CategoryDetailView
-from .views.nominees_view import NomineesListCreateView#, NomineesDetailView
+from .views.nominees_view import NomineesListCreateView, NomineesDeleteView
 
 urlpatterns = [
     path('categories/', CategoryListCreateView.as_view(),
@@ -10,5 +10,7 @@ urlpatterns = [
     path("nominees/", NomineesListCreateView.as_view(),
          name="All nominees"),
     path("nominees/<uuid:pk>", NomineesListCreateView.as_view(),
-         name="Nominee")
+         name="Nominee"),
+    path("nominees/delete/<uuid:pk>", NomineesDeleteView.as_view(),
+         name="Delete Nominee")
 ]

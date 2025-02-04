@@ -39,7 +39,24 @@ with req.post(link, headers=head, data=json.dumps(nom)) as marko:
 nom = {"name": "temp",
        "description": "The third nominee",
        "category_ID": "not There"}
+
 with req.post(link, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(polo)
+
+with req.get(link, headers=head) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(len(polo))
+
+# ID = "6232490e-7aac-4922-8112-e6b4eb0f5ba4" # Chosen from database
+# with req.delete(link + "d/" + ID, headers=head) as marko:
+#     print(marko.status_code)
+#     polo = marko.json()
+#     print(polo)
+
+with req.get(link, headers=head) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(len(polo))
