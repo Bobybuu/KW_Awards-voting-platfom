@@ -1,17 +1,17 @@
 from collections import Counter
 
-# Exemple de données : liste des votes
+# Sample data: voting list  
 votes = [
     "Nominee A", "Nominee B", "Nominee A", "Nominee C",
     "Nominee B", "Nominee A", "Nominee C", "Nominee C",
     "Nominee A", "Nominee B"
 ]
 
-# Utilisation de Counter pour compter les votes
+# Using Counter to count votes
 vote_count = Counter(votes)
 
-# Affichage des résultats
-print("Résultats du vote :")
+# Displaying the results
+print("voting results :")
 for nominee, count in vote_count.items():
     print(f"{nominee}: {count} votes")
 
