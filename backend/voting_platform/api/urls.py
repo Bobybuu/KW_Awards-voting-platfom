@@ -1,7 +1,10 @@
+
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views.users import UserViewSet, CustomSignup
 from authemail import views
+from .views.category_views import CategoryListCreateView, CategoryDetailView
+
 
 
 router = DefaultRouter()
@@ -32,4 +35,14 @@ urlpatterns = [
 
     path('password/change/', views.PasswordChange.as_view(),
         name='authemail-password-change'),
+
+
+
+
+
+    path('categories/', CategoryListCreateView.as_view(),
+         name='category-list-create'),
+    path('categories/<uuid:pk>/',
+         CategoryDetailView.as_view(), name='category-detail'),
+
 ]

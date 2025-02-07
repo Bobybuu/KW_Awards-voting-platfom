@@ -1,3 +1,4 @@
+# README.md file for for voting platforme project  
 # Django Project Setup
 
 This is a Django project using PostgreSQL as the database.
@@ -170,23 +171,34 @@ This is a Django project using PostgreSQL as the database.
     git checkout -b your-branch-name
     ```
 
-2. **Make your changes and commit them:**
+    ```bash
+    git branch --set-upstream-to=origin/main <branch-name>  # If tracking main
+    ```
+
+2. **update from main after branch checkout**
+
+   ```bash
+   git pull origin main
+
+   ```
+
+3. **Make your changes and commit them:**
 
     ```bash
     git add .
     git commit -m "Your commit message"
     ```
 
-3. **Push your branch to the remote repository:**
+4. **Push your branch to the remote repository:**
 
     ```bash
     git push origin your-branch-name
     ```
 
-4. **Create a pull request:**
+5. **Create a pull request:**
 
     Go to the repository on GitHub and create a pull request from your branch.
 
-5. **Merge the pull request:**
+6. **Merge the pull request:**
 
     Once your pull request is reviewed and approved, it can be merged into the main branch.

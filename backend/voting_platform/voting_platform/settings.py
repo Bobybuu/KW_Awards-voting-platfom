@@ -49,7 +49,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'authemail',
     'rest_framework.authtoken',
-    "corsheaders",
+    "corsheaders"
+
+    "drf_yasg",
+
 ]
 
 MIDDLEWARE = [
