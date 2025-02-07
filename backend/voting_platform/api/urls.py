@@ -2,6 +2,7 @@ from django.urls import path
 from .views.category_views import CategoryListCreateView, CategoryDetailView
 from .views.nominees_view import (NomineesListCreateView, NomineesDeleteView,
                                   NomineesUpdateView)
+from .views.awards_view import AwardsListCreateView
 
 urlpatterns = [
     path('categories/', CategoryListCreateView.as_view(),
@@ -15,5 +16,9 @@ urlpatterns = [
     path("nominees/delete/<uuid:pk>", NomineesDeleteView.as_view(),
          name="Delete Nominee"),
     path("nominees/put/<uuid:pk>", NomineesUpdateView.as_view(),
-         name="Nominee Edit")
+         name="Nominee Edit"),
+    path("awards/", AwardsListCreateView.as_view(),
+         name="All Awards"),
+    path("awards/<uuid:pk>", AwardsListCreateView.as_view(),
+         name="Award")
 ]

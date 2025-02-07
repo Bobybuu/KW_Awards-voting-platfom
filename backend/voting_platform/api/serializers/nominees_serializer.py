@@ -1,7 +1,9 @@
+"""
+Handels the object-to-json and viseversa converts
+"""
 from rest_framework import serializers
-from rest_framework.response import Response
 from ..models.nominees import Nominees
-from ..models.category import Category
+from ..models.awards import Awards
 import uuid
 
 
@@ -9,7 +11,6 @@ class NomineesSerialiser(serializers.ModelSerializer):
     """
     Handles the serialization process of this table.
     """
-
     category_ID = serializers.CharField()
 
     class Meta:
@@ -17,7 +18,8 @@ class NomineesSerialiser(serializers.ModelSerializer):
         fields = ["ID", "name", "description", "created_at",
                   "updated_at", "image", "votes", "share_link",
                   "category_ID"]
-        read_only_fields = ["ID", "created_at", "updated_at"]
+        read_only_fields = ["ID", "created_at"]
+
 
     def validate_category_ID(self, value):
         """
@@ -26,10 +28,10 @@ class NomineesSerialiser(serializers.ModelSerializer):
         try:
             # If value is a valid UUID
             category_uuid = uuid.UUID(value)
-            category = Category.objects.get(id=category_uuid)
-        except (ValueError, Category.DoesNotExist):
+            category = Awards.objects.get(id=category_uuid)
+        except (ValueError, Awards.DoesNotExist):
             # Treat value as a category name
-            category = Category.objects.filter(name=value).first()
+            category = Awards.objects.filter(name=value).first()
             if not category:
                 raise serializers.ValidationError("Invalid category name"
                                                   +" or UUID.")
@@ -37,13 +39,13 @@ class NomineesSerialiser(serializers.ModelSerializer):
         # Return the UUID for internal use
         return category
 
-    def create(self, input_data):
+    def create(self, validated_data):
         """
         Creates the object and adds it to the database.
         """
         # Assign the correct UUID from the validated data
-        category_id = input_data.pop("category_ID")
-        return Nominees.objects.create(category_ID=category_id, **input_data)
+        category_id = validated_data.pop("category_ID")
+        return Nominees.objects.create(category_ID=category_id, **validated_data)
 
     def validate_name(self, value):
         """

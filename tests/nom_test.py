@@ -14,7 +14,7 @@ with req.get(link, headers=head) as marko:
 
 nom = {"name": "Alpha",
        "description": "The first nominee",
-       "category_ID": "Beta"}
+       "category_ID": "Best Actor"}
 with req.post(link, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()
