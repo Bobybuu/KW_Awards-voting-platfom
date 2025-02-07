@@ -28,13 +28,13 @@ class NomineesSerialiser(serializers.ModelSerializer):
         try:
             # If value is a valid UUID
             category_uuid = uuid.UUID(value)
-            category = Awards.objects.get(id=category_uuid)
+            category = Awards.objects.get(ID=category_uuid)
         except (ValueError, Awards.DoesNotExist):
             # Treat value as a category name
             category = Awards.objects.filter(name=value).first()
             if not category:
-                raise serializers.ValidationError("Invalid category name"
-                                                  +" or UUID.")
+                raise serializers.ValidationError("Invalid award name"
+                                                  +" or UUID")
 
         # Return the UUID for internal use
         return category
@@ -45,7 +45,8 @@ class NomineesSerialiser(serializers.ModelSerializer):
         """
         # Assign the correct UUID from the validated data
         category_id = validated_data.pop("category_ID")
-        return Nominees.objects.create(category_ID=category_id, **validated_data)
+        return Nominees.objects.create(category_ID=category_id,
+                                       **validated_data)
 
     def validate_name(self, value):
         """
