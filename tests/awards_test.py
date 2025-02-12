@@ -1,3 +1,6 @@
+"""
+This file evaluates how the awards associated endpoints work
+"""
 import requests as req
 import json
 

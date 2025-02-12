@@ -9,12 +9,14 @@ from django.core.validators import MinLengthValidator
 
 class User(EmailAbstractUser, PermissionsMixin):
     """ A user class email functionalities """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          editable=False)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     stage_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    phone_number = models.CharField(max_length=255, unique=True, blank=True,
+                                    null=True)
     type = models.CharField(max_length=255, default="user")
     password = models.CharField(max_length=128)
     is_staff = models.BooleanField(default=False)

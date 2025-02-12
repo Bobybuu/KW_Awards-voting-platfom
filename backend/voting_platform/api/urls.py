@@ -18,7 +18,6 @@ urlpatterns = [
     path('', include(router.urls)),
 
     path('auth/signup', CustomSignup.as_view(), name='custom-signup'),
-    path('auth/signup/', CustomSignup.as_view(), name='custom-signup'),
 
     path('auth/verify-email/', views.SignupVerify.as_view(),
         name='authemail-signup-verify'),
@@ -64,6 +63,4 @@ urlpatterns = [
          name="Delete Award"),
     path("awards/put/<uuid:pk>", AwardsUpdateView.as_view(),
          name="Edit Award")
-    path('categories/<uuid:pk>/',
-         CategoryDetailView.as_view(), name='category-detail'),
 ]
