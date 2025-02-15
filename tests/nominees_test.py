@@ -5,18 +5,20 @@ import requests as req
 import json
 
 head = {"Content-Type": "application/json"}
-link = "http://localhost:8000/api/nominees/"
+link = "http://localhost:8000/api/"
 
-with req.get(link, headers=head) as marko:
+endpoint = "nominees/"
+with req.get(link + endpoint, headers=head) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(polo)
     print("")
 
+# Create
 nom = {"name": "Alpha",
        "description": "The first nominee",
-       "category_ID": "Best Actor"}
-with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+       "category_ID": "Best Game Voice Actor"}
+with req.post(link + endpoint, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(polo)
@@ -24,8 +26,8 @@ with req.post(link, headers=head, data=json.dumps(nom)) as marko:
 
 nom = {"name": "Beta",
        "description": "The second nominee",
-       "category_ID": "Best Programmer"}
-with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+       "category_ID": "18ec37fe-a3c9-4858-a732-49fb5d869aa2"}
+with req.post(link + endpoint, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(polo)
@@ -33,8 +35,8 @@ with req.post(link, headers=head, data=json.dumps(nom)) as marko:
 
 nom = {"name": "Theta",
        "description": "The third nominee",
-       "category_ID": "291a37c2-7a06-4162-b865-ddb3298f2b5f"}
-with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+       "category_ID": "18ec37fe-a3c9-4858-a732-49fb5d869aa2"}
+with req.post(link + endpoint, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(polo)
@@ -43,17 +45,19 @@ with req.post(link, headers=head, data=json.dumps(nom)) as marko:
 nom = {"name": "temp",
        "description": "The third nominee",
        "category_ID": "not There"}
-with req.post(link, headers=head, data=json.dumps(nom)) as marko:
+with req.post(link + endpoint, headers=head, data=json.dumps(nom)) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(polo)
     print("")
 
-with req.get(link, headers=head) as marko:
+# Get all
+with req.get(link + endpoint, headers=head) as marko:
     print(marko.status_code)
     polo = marko.json()
     print(len(polo))
     print("")
+    ID = polo[-1].get("ID")
 
 # ID = "6232490e-7aac-4922-8112-e6b4eb0f5ba4" # Chosen from database
 # with req.delete(link + "delete/" + ID, headers=head) as marko:
@@ -61,24 +65,25 @@ with req.get(link, headers=head) as marko:
 #     polo = marko.json()
 #     print(polo)
 
-with req.get(link, headers=head) as marko:
+with req.get(link + endpoint + ID, headers=head) as marko:
     print(marko.status_code)
     polo = marko.json()
+    print(polo)
     print(len(polo))
+    print("")
 
 
-# ID = "d5cfc1bb-e497-49ad-9d4c-68c87817637b" # Chosen from database
-# edit = {"name": "Edited again"}
-# with req.put(link + "put/" + ID, headers=head,
-#              data=json.dumps(edit)) as marko:
-#     print(marko.status_code)
-#     polo = marko.json()
-#     print(polo)
+edit = {"name": "Edited again"}
+with req.put(link + endpoint + "put/" + ID, headers=head,
+             data=json.dumps(edit)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+    print("")
 
-# ID = "d5cfc1bb-e497-49ad-9d4c-68c87817637b" # Chosen from database
-# with req.get(link + ID, headers=head) as marko:
-#     print(marko.status_code)
-#     polo = marko.json()
-#     print("")
-#     print("")
-#     print(polo)
+with req.get(link + endpoint + ID, headers=head) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print("")
+    print("")
+    print(polo)

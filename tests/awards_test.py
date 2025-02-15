@@ -5,41 +5,58 @@ import requests as req
 import json
 
 head = {"Content-Type": "application/json"}
-link = "http://localhost:8000/api/awards/"
+link = "http://localhost:8000/api/"
 
-# award = {"name":"Best Programmer",
-#          "sub_category": "Programmers"}
-# with req.post(link, headers=head,
-#               data=json.dumps(award)) as marko:
+endpoint = "awards/"
+award = {"name":"Best Game Voice Actor",
+         "sub_category": "a12a16ea-b7d4-4bb2-895a-feffbc716b2a"}
+# Create
+with req.post(link + endpoint, headers=head,
+              data=json.dumps(award)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+    print("")
+
+award2 = {"name": "Best Supporting Voice Actor",
+          "sub_category": "a12a16ea-b7d4-4bb2-895a-feffbc716b2a"}
+with req.post(link + endpoint, headers=head,
+              data=json.dumps(award2)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+    print("")
+
+# Get all
+with req.get(link + endpoint, headers=head) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+    print("")
+    ID = polo[-1].get("ID")
+
+#  Get last one
+with req.get(link + endpoint + ID, headers=head) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+    print("")
+
+# Delete
+# with req.delete(link + endpoint + "delete/" + ID, headers=head) as marko:
 #     print(marko.status_code)
-#     polo = marko.json()
-#     print(polo)
 
-# award2 = {"name": "Best Actor"}
-# with req.post(link, headers=head,
-#               data=json.dumps(award2)) as marko:
-#     print(marko.status_code)
-#     polo = marko.json()
-#     print(polo)
-#     ID = polo.get("ID")
+edit = {
+    "name": "Who Is The Best Supporting Voice Actor",
+}
+with req.put(link + endpoint + "put/" + ID, headers=head,
+             data=json.dumps(edit)) as marko:
+    print(marko.status_code)
+    polo = marko.json()
+    print(polo)
+    print("")
 
-# with req.get(link, headers=head) as marko:
-#     print(marko.status_code)
-#     polo = marko.json()
-#     print(polo)
-
-# with req.get(link + ID, headers=head) as marko:
-#     print(marko.status_code)
-#     polo = marko.json()
-#     print(polo)
-
-# ID = "291a37c2-7a06-4162-b865-ddb3298f2b5f"
-# with req.delete(link + "delete/" + ID, headers=head) as marko:
-#     print(marko.status_code)
-
-ID = "9d9a3e89-71d0-4ccf-ae94-c41c36b13f36"
 # edit = {
-#     "name": "Who Is The Best Actor",
 #     "sub_category": "Actors"
 # }
 # with req.put(link + "put/" + ID, headers=head,
@@ -47,12 +64,3 @@ ID = "9d9a3e89-71d0-4ccf-ae94-c41c36b13f36"
 #     print(marko.status_code)
 #     polo = marko.json()
 #     print(polo)
-
-edit = {
-    "sub_category": "Actors"
-}
-with req.put(link + "put/" + ID, headers=head,
-             data=json.dumps(edit)) as marko:
-    print(marko.status_code)
-    polo = marko.json()
-    print(polo)
