@@ -12,6 +12,8 @@ from .views.nominees_view import (NomineesListCreateView, NomineesDeleteView,
 from .views.awards_view import (AwardsListCreateView, AwardsDeleteView,
                                 AwardsUpdateView)
 
+from .views.vote_views import VoteListCreateView
+
 
 
 
@@ -22,36 +24,30 @@ urlpatterns = [
     path('', include(router.urls)),
 
     path('auth/signup', CustomSignup.as_view(), name='custom-signup'),
-    path('auth/signup/', CustomSignup.as_view(), name='custom-signup'),
-
     path('auth/verify-email/', views.SignupVerify.as_view(),
-        name='authemail-signup-verify'),
+         name='authemail-signup-verify'),
     path('auth/login/', views.Login.as_view(), name='authemail-login'),
     path('auth/logout/', views.Logout.as_view(), name='authemail-logout'),
-
     path('auth/password/reset/', views.PasswordReset.as_view(),
-        name='authemail-password-reset'),
-
+         name='authemail-password-reset'),
     path('auth/password/reset/verify/', views.PasswordResetVerify.as_view(),
         name='authemail-password-reset-verify'),
-    path('auth/password/reset/verified/', views.PasswordResetVerified.as_view(),
-        name='authemail-password-reset-verified'),
+    path('auth/password/reset/verified/',
+         views.PasswordResetVerified.as_view(),
+         name='authemail-password-reset-verified'),
     path('email/change/', views.EmailChange.as_view(),
          name='authemail-email-change'),
     path('email/change/verify/', views.EmailChangeVerify.as_view(),
          name='authemail-email-change-verify'),
 
     path('password/change/', views.PasswordChange.as_view(),
-        name='authemail-password-change'),
-
-
-
-
+         name='authemail-password-change'),
 
     path('categories/', CategoryListCreateView.as_view(),
          name='category-list-create'),
     path('categories/<uuid:pk>/',CategoryDetailView.as_view(),
          name='category-detail'),
+
     path("nominees/", NomineesListCreateView.as_view(),
          name="All nominees"),
     path("nominees/<uuid:pk>", NomineesListCreateView.as_view(),
@@ -60,6 +56,7 @@ urlpatterns = [
          name="Delete Nominee"),
     path("nominees/put/<uuid:pk>", NomineesUpdateView.as_view(),
          name="Nominee Edit"),
+
     path("awards/", AwardsListCreateView.as_view(),
          name="All Awards"),
     path("awards/<uuid:pk>", AwardsListCreateView.as_view(),
@@ -67,15 +64,12 @@ urlpatterns = [
     path("awards/delete/<uuid:pk>", AwardsDeleteView.as_view(),
          name="Delete Award"),
     path("awards/put/<uuid:pk>", AwardsUpdateView.as_view(),
-         name="Edit Award")
-    path('categories/<uuid:pk>/',
-         CategoryDetailView.as_view(), name='category-detail'),
+         name="Edit Award"),
 
     path('subcategories/', SubCategoryListCreateView.as_view(),
         name='sub_category-list-create'),
     path('subcategories/<uuid:pk>/',
          SubCategoryDetailView.as_view(), name='sub_category-detail'),
-
-
-
+    
+    path("votes/", VoteListCreateView.as_view(), name="Votes")
 ]

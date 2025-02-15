@@ -3,6 +3,7 @@ Defines the Awards table and its relationship
 """
 from django.db import models
 import uuid
+from .sub_category import SubCategory
 
 
 class Awards(models.Model):
@@ -13,8 +14,8 @@ class Awards(models.Model):
                           editable=False)
     name = models.TextField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    sub_category = models.TextField(default="Should FK to sub" +
-                                    " categories table")
+    sub_category = models.ForeignKey(SubCategory, to_field="id",
+                                     on_delete=models.CASCADE)
     
     class Meta:
         """

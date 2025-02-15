@@ -148,7 +148,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'api.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Disables email sending for now
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_FROM = os.getenv("EMAIL_FROM")
 EMAIL_BCC = os.getenv("EMAIL_BCC")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
