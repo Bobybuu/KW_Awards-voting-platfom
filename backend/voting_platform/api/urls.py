@@ -12,6 +12,8 @@ from .views.nominees_view import (NomineesListCreateView, NomineesDeleteView,
 from .views.awards_view import (AwardsListCreateView, AwardsDeleteView,
                                 AwardsUpdateView)
 
+from .views.vote_views import VoteListCreateView
+
 
 
 
@@ -67,5 +69,7 @@ urlpatterns = [
     path('subcategories/', SubCategoryListCreateView.as_view(),
         name='sub_category-list-create'),
     path('subcategories/<uuid:pk>/',
-         SubCategoryDetailView.as_view(), name='sub_category-detail')
+         SubCategoryDetailView.as_view(), name='sub_category-detail'),
+    
+    path("votes/", VoteListCreateView.as_view(), name="Votes")
 ]

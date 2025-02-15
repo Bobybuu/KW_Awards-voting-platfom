@@ -1,17 +1,28 @@
+"""
+Defines the Votes table and its relationship
+"""
 from django.db import models
-from .category import SubCategory
-from .nominee import Nominee
+from .nominees import Nominees
+from .sub_category import SubCategory
 import uuid
 
 
-class Vote(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sub_category = models.ForeignKey(
-        SubCategory, on_delete=models.CASCADE, related_name='sub_categories')
-    nominee = models.ForeignKey(
-        Nominee, on_delete=models.CASCADE, related_name='nominees')
+class Votes(models.Model):
+    """
+    Defines the voteing functionality.
+    """
+    ID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE,
+                                     to_field="id")
+    nominee = models.ForeignKey(Nominees, on_delete=models.CASCADE,
+                                to_field="ID")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"Sub Category: {self.sub_category.name} | Category: {self.sub_category.category.name}"
+    class Meta:
+        """
+        Indexes by ID
+        """
+        indexes = [
+            models.Index(fields=["ID"])
+        ]
