@@ -1,4 +1,4 @@
-# README.md file for for voting platforme project  
+# README.md file for for voting platform project  
 # Django Project Setup
 
 This is a Django project using PostgreSQL as the database.
