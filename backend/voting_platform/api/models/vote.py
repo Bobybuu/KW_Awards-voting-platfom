@@ -14,8 +14,8 @@ class Votes(models.Model):
     ID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE,
                                      to_field="id")
-    nominee = models.ForeignKey(Nominees, on_delete=models.CASCADE,
-                                to_field="ID")
+    nominee = models.ForeignKey(Nominees, on_delete=models.CASCADE, related_name="votes",
+                                to_field="id")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -20,8 +20,6 @@ class User(EmailAbstractUser, PermissionsMixin):
     type = models.CharField(max_length=255, default="user")
     password = models.CharField(max_length=128)
     is_staff = models.BooleanField(default=False)
-    bio = models.TextField(blank=True, null=True)
-    profile_photo = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
