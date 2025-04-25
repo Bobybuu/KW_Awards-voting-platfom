@@ -21,6 +21,7 @@ This is a Django project using PostgreSQL as the database.
 2. **Create a virtual environment:**
 
     ```bash
+    python --version 
     python3 -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
