@@ -133,11 +133,11 @@ This is a Django project using PostgreSQL as the database.
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('votingplatform'),
-            'USER': os.getenv('test'),
-            'PASSWORD': os.getenv('giddy254'),
-            'HOST': os.getenv('localhost'),
-            'PORT': os.getenv('5432'),
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
         }
     }
     ```
