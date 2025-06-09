@@ -7,7 +7,7 @@
         "ghcr.io/itsmechlark/features/postgresql:1": {
             "version": "14"
         },
-        "ghcr.io/hspaans/devcontainer-features/django-upgrade:1": {
+        "ghcr.io/hspaans/devcontainer-features/django-upgrade:2": {
             "version": "latest"
         },
         "ghcr.io/devcontainers-extra/features/pipx-package:1": {
